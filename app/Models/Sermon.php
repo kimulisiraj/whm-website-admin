@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Sermon extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'banner_image',
+        'link',
+        'title',
+        'description'
+    ];
+
+    public function getImageAttribute()
+    {
+        return asset($this->banner_imate);
+    }
+}
