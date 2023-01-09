@@ -11,7 +11,7 @@ class SermonController extends Controller
 {
     public function __invoke(): Collection
     {
-        return Sermon::query()->latest()->limit(3)->get();
+        return Sermon::query()->latest('updated_at')->limit(3)->get();
     }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
+
 class ChurchEvent extends Model
 {
     use HasFactory, SoftDeletes;
@@ -22,7 +23,7 @@ class ChurchEvent extends Model
 
     protected $casts = [
         'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
+        'ends_at'   => 'datetime',
     ];
 
 
@@ -31,9 +32,15 @@ class ChurchEvent extends Model
         return asset($this->banner_image);
     }
 
-    public function getHappeningAttribute()
+    public function getHappensAttribute()
     {
-
+        if ($this->starts_at->day === $this->ends_at->day) {
+            return $this->starts_at->format('h') . ' - ' . $this->ends_at->format('h A | D, d M');
+        }
+        if ($this->starts_at->month === $this->ends_at->month) {
+            return $this->starts_at->format('h') . ' - ' . $this->ends_at->format('h A') . ' | ' . $this->starts_at->format('D d') . ' - ' . $this->ends_at->format('D d M');
+        }
+        return $this->starts_at->format('h') . ' - ' . $this->ends_at->format('h A') . ' | ' . $this->starts_at->format('D d M') . ' - ' . $this->ends_at->format('D d M');
     }
 
     public function scopePassed(Builder $query)

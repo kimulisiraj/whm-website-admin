@@ -28,6 +28,6 @@ class Banner extends Model
 
     public function getImageAttribute($value)
     {
-        return app()->isLocal() ? $this->banner_image : asset($this->banner_image);
+        return asset($this->banner_image);
     }
 }

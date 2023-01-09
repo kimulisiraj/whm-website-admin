@@ -10,6 +10,6 @@ class TestimonyController extends Controller
 {
     public function index()
     {
-        return Testimony::latest()->paginate(20);
+        return Testimony::latest('updated_at')->paginate(20);
     }
 }

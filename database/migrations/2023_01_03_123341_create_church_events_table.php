@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('banner_image');
             $table->string('title');
-            $table->text('description');
-            $table->text('link');
-            $table->text('link_text');
+            $table->string('description');
+            $table->string('link');
+            $table->string('link_text');
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->softDeletes();

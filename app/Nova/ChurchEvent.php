@@ -13,6 +13,9 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ChurchEvent extends Resource
 {
+    public static $indexDefaultOrder = [
+        'starts_at' => 'desc',
+    ];
     /**
      * The model the resource corresponds to.
      *
@@ -25,7 +28,7 @@ class ChurchEvent extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -47,15 +50,16 @@ class ChurchEvent extends Resource
         return [
             Avatar::make('Image', 'banner_image')->prunable()->disk('public'),
             Text::make('Title')->required(),
-            Trix::make('Description')->required(),
-            Text::make('Link')->hideFromIndex()->required(),
-            Text::make('Link Text')->hideFromIndex()->required(),
             DateTime::make('Starts At')
                 ->rules(['after:yesterday'])
                 ->required(),
             DateTime::make('Ends At')
                 ->rules(['after:starts_at'])
                 ->required(),
+            Text::make('Description')->hideFromIndex()->required(),
+            Text::make('Link')->hideFromIndex()->required(),
+            Text::make('Link Text')->hideFromIndex()->required(),
+
         ];
     }
 

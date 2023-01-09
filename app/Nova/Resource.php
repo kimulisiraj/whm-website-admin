@@ -7,6 +7,11 @@ use Laravel\Nova\Resource as NovaResource;
 
 abstract class Resource extends NovaResource
 {
+
+    public static $indexDefaultOrder = [
+        'updated_at' => 'desc',
+        'id' => 'desc',
+    ];
     /**
      * Build an "index" query for the given resource.
      *
@@ -16,6 +21,10 @@ abstract class Resource extends NovaResource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
+        if (empty($request->get('orderBy'))) {
+            $query->getQuery()->orders = [];
+            return $query->orderBy(key(static::$indexDefaultOrder), reset(static::$indexDefaultOrder));
+        }
         return $query;
     }
 

@@ -12,14 +12,14 @@ class EventController extends Controller
 
     public function passed()
     {
-        $events = ChurchEvent::query()->passed()->latest()->get();
+        $events = ChurchEvent::query()->passed()->latest('updated_at')->get();
 
         return ChurchEventResource::collection($events);
     }
 
     public function live()
     {
-        $event = ChurchEvent::query()->live()->latest()->first();
+        $event = ChurchEvent::query()->live()->latest('updated_at')->first();
 
         if (!$event) {
             return ['data'=> []];
@@ -30,7 +30,7 @@ class EventController extends Controller
 
     public function upComing()
     {
-        $events = ChurchEvent::query()->UpComing()->latest()->limit(2)->get();
+        $events = ChurchEvent::query()->UpComing()->latest('starts_at')->limit(2)->get();
 
         return ChurchEventResource::collection($events);
     }
