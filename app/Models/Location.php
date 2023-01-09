@@ -32,11 +32,11 @@ class Location extends Model
 
     public function getImageAttribute()
     {
-        return asset($this->banner_image);
+        return asset('storage/'.$this->banner_image);
     }
 
     public function getPastorsPhotoAttribute()
     {
-        return asset($this->pastors_image);
+        return asset('storage/'.$this->pastors_image);
     }
 }

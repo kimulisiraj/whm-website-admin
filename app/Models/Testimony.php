@@ -18,6 +18,6 @@ class Testimony extends Model
 
     public function getImageAttribute()
     {
-        return asset($this->banner_image);
+        return asset('storage/'.$this->banner_image);
     }
 }

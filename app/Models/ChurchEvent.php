@@ -29,7 +29,7 @@ class ChurchEvent extends Model
 
     public function getImageAttribute()
     {
-        return asset($this->banner_image);
+        return asset('storage/'.$this->banner_image);
     }
 
     public function getHappensAttribute()

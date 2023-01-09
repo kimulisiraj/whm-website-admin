@@ -19,6 +19,6 @@ class Sermon extends Model
 
     public function getImageAttribute()
     {
-        return asset($this->banner_imate);
+        return asset('storage/'.$this->banner_imate);
     }
 }
