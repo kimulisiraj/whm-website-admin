@@ -17,6 +17,10 @@ class Sermon extends Model
         'description'
     ];
 
+    protected $appends =[
+        'image'
+    ];
+
     public function getImageAttribute()
     {
         return asset('storage/'.$this->banner_imate);
