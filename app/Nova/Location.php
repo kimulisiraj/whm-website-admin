@@ -59,11 +59,11 @@ class Location extends Resource
                 ->options([
                     'Network Leader' => 'Network Leader',
                     'Cluster Leader' => 'Cluster Leader',
-                    'Location Pastor' => 'Location Pastor'
+                    'Location Pastor' => 'Location Pastor',
+                    'Location Pastors' => 'Location Pastors'
                 ])->sortable(),
-            Text::make('Location', 'location_name')->required()->sortable(),
-            Text::make('Address')->required()->hideFromIndex(),
-            
+            Text::make('Location', 'location_name')->rules('required')->required()->sortable(),
+            Text::make('Address')->rules('required')->required()->hideFromIndex(),
             HasMany::make('Activities', 'activities', \App\Nova\LocationActivity::class)->hideFromIndex(),
             Text::make('Description'),
         ];
