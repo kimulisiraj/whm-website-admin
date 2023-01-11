@@ -49,16 +49,16 @@ class ChurchEvent extends Resource
     {
         return [
             Avatar::make('Image', 'banner_image')->prunable()->disk('public'),
-            Text::make('Title')->required(),
+            Text::make('Title')->rules('required', 'min:3', 'max:100')->required(),
             DateTime::make('Starts At')
-                ->rules(['after:yesterday'])
+                ->rules(['after:yesterday', 'required'])
                 ->required(),
             DateTime::make('Ends At')
-                ->rules(['after:starts_at'])
+                ->rules(['after:starts_at', 'required'])
                 ->required(),
             Text::make('Description')->hideFromIndex()->required(),
-            Text::make('Link')->hideFromIndex()->required(),
-            Text::make('Link Text')->hideFromIndex()->required(),
+            Text::make('Link')->rules('required', 'url')->hideFromIndex()->required(),
+            Text::make('Link Text')->rules('required', 'min:3', 'max:20')->hideFromIndex()->required(),
 
         ];
     }

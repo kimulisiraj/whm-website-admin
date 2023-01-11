@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -44,9 +45,13 @@ class Testimony extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            Avatar::make('Image', 'banner_image')->required()->prunable()->disk('public'),
-            Text::make('title')->required(),
-            Trix::make('body')->required(),
+            Avatar::make('Image', 'banner_image')
+                ->rules('required', 'image', 'dimensions:min_width:640,max_width:2048')
+                ->required()
+                ->prunable()
+                ->disk('public'),
+            Text::make('title')->rules('required', 'min:2', 'max:225')->required(),
+            Markdown::make('body')->rules('required')->required(),
         ];
     }
 

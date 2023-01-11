@@ -45,11 +45,11 @@ class Banner extends Resource
         return [
             ID::make()->sortable(),
             Avatar::make('Image', 'banner_image')->prunable()->disk('public'),
-            Text::make('Title')->required(),
-            Text::make('Phase')->required(),
+            Text::make('Title')->rules('required', 'min:3', 'max:100')->required(),
+            Text::make('Phase')->rules('required', 'min:3', 'max:100')->required(),
             Text::make('Description')->nullable(),
-            Text::make('Link Text')->required(),
-            Text::make('Link')->hideFromIndex()->required(),
+            Text::make('Link Text')->rules('required', 'min:3', 'max:50')->required(),
+            Text::make('Link')->rules('required', 'url')->hideFromIndex()->required(),
         ];
     }
 

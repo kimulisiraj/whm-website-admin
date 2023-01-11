@@ -5,7 +5,6 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
@@ -46,26 +45,33 @@ class Location extends Resource
     {
         return [
             Avatar::make('Pastors Image', 'pastors_image')
-                ->rules('required')
+                ->rules('required', 'dimensions:min_width=640,max_width=1024')
                 ->prunable()
                 ->disk('public'),
             Avatar::make('Banner Image', 'banner_image')
-                ->rules('required')
+                ->rules('required', 'dimensions:min_width=640,max_width=2028')
                 ->prunable()
                 ->disk('public'),
-            Text::make('Leader Name', 'pastors_name')->required()->sortable(),
+            Text::make('Leader Name', 'pastors_name')
+                ->rules('required', 'min:2', 'max:225')
+                ->required()
+                ->sortable(),
             Select::make('Leaders Level', 'pastors_level')
+                ->rules('required')
                 ->required()
                 ->options([
-                    'Network Leader' => 'Network Leader',
-                    'Cluster Leader' => 'Cluster Leader',
-                    'Location Pastor' => 'Location Pastor',
-                    'Location Pastors' => 'Location Pastors'
+                    'Cluster Leader'   => 'Cluster Leader',
+                    'Cluster Leaders'  => 'Cluster Leaders',
+                    'Location Pastor'  => 'Location Pastor',
+                    'Location Pastors' => 'Location Pastors',
+                    'Network Leader'   => 'Network Leader',
+                    'Network Leaders'  => 'Network Leaders',
+                    'Movement Leaders' => 'Movement Leaders',
                 ])->sortable(),
             Text::make('Location', 'location_name')->rules('required')->required()->sortable(),
             Text::make('Address')->rules('required')->required()->hideFromIndex(),
             HasMany::make('Activities', 'activities', \App\Nova\LocationActivity::class)->hideFromIndex(),
-            Text::make('Description'),
+            Trix::make('Description'),
         ];
     }
 

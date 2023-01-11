@@ -45,10 +45,12 @@ class Sermon extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            Avatar::make('Image', 'banner_image')->prunable()->disk('public'),
-            Text::make('Title')->required(),
-            Text::make('Description')->required(),
-            Text::make('Link')->sortable()->required(),
+            Avatar::make('Image', 'banner_image')
+                ->rules('required', 'image', 'dimensions:min_width:640,max_width:2048')
+                ->prunable()->disk('public'),
+            Text::make('Title')->rules('required', 'min:3', 'max:100')->required(),
+            Text::make('Description')->rules('required', 'min:3', 'max:225')->required(),
+            Text::make('Link')->rules('required', 'url')->sortable()->required(),
         ];
     }
 
