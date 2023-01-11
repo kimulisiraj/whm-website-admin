@@ -45,8 +45,14 @@ class Location extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            Avatar::make('Pastors Image', 'pastors_image')->prunable()->disk('public'),
-            Avatar::make('Banner Image', 'banner_image')->prunable()->disk('public'),
+            Avatar::make('Pastors Image', 'pastors_image')
+                ->rules('required')
+                ->prunable()
+                ->disk('public'),
+            Avatar::make('Banner Image', 'banner_image')
+                ->rules('required')
+                ->prunable()
+                ->disk('public'),
             Text::make('Leader Name', 'pastors_name')->required()->sortable(),
             Select::make('Leaders Level', 'pastors_level')
                 ->required()
@@ -57,8 +63,9 @@ class Location extends Resource
                 ])->sortable(),
             Text::make('Location', 'location_name')->required()->sortable(),
             Text::make('Address')->required()->hideFromIndex(),
+            
             HasMany::make('Activities', 'activities', \App\Nova\LocationActivity::class)->hideFromIndex(),
-            Trix::make('Description'),
+            Text::make('Description'),
         ];
     }
 
