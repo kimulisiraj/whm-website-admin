@@ -1,6 +1,9 @@
 <?php
 
+use App\Imports\LocationsImport;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::redirect('/', '/nova');
+Route::get('/upload-locations', function () {
+    Excel::import(new LocationsImport(), storage_path('app/locations.xlsx'));
 });
