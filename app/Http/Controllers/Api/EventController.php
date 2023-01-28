@@ -30,7 +30,7 @@ class EventController extends Controller
 
     public function upComing()
     {
-        $events = ChurchEvent::query()->UpComing()->latest('starts_at')->limit(2)->get();
+        $events = ChurchEvent::query()->UpComing()->latest('starts_at', 'desc')->limit(2)->get();
 
         return ChurchEventResource::collection($events);
     }
