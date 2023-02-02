@@ -10,6 +10,6 @@ class BannerController extends Controller
 {
     public function __invoke()
     {
-        return new BannerResource(Banner::latest('updated_at')->first());
+        return new BannerResource(Banner::inRandomOrder()->first());
     }
 }
