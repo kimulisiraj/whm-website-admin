@@ -26,6 +26,11 @@ class Banner extends Model
         'ends_at'   => 'datetime',
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
     public function getImageAttribute($value)
     {
         return asset('storage/'.$this->banner_image);

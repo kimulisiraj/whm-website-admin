@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -47,6 +48,7 @@ class Banner extends Resource
             Avatar::make('Image', 'banner_image')->prunable()->disk('public'),
             Text::make('Title')->rules('required', 'min:3', 'max:100')->required(),
             Text::make('Phase')->rules('required', 'min:3', 'max:100')->required(),
+            Boolean::make('Active', 'is_active')->required(),
             Text::make('Description')->nullable(),
             Text::make('Link Text')->rules('required', 'min:3', 'max:50')->required(),
             Text::make('Link')->rules('required', 'url')->hideFromIndex()->required(),

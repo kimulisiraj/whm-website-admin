@@ -10,6 +10,6 @@ class BannerController extends Controller
 {
     public function __invoke()
     {
-        return new BannerResource(Banner::inRandomOrder()->first());
+        return new BannerResource(Banner::active()->inRandomOrder()->first());
     }
 }
