@@ -46,7 +46,6 @@ class Sermon extends Resource
     {
         return [
             Avatar::make('Image', 'banner_image')
-                ->rules('required', 'image', 'dimensions:min_width:640,max_width:2048')
                 ->prunable()->disk('public'),
             Text::make('Title')->rules('required', 'min:3', 'max:100')->required(),
             Text::make('Description')->rules('required', 'min:3', 'max:225')->required(),

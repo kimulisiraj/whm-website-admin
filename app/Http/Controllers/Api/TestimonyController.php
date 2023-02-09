@@ -12,4 +12,9 @@ class TestimonyController extends Controller
     {
         return Testimony::latest('updated_at')->paginate(20);
     }
+
+    public function show(Testimony $testimony)
+    {
+        return $testimony;
+    }
 }

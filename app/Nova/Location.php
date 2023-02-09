@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -45,11 +46,10 @@ class Location extends Resource
     {
         return [
             Avatar::make('Pastors Image', 'pastors_image')
-                ->rules('required', 'dimensions:min_width=640,max_width=1024')
                 ->prunable()
                 ->disk('public'),
+            Slug::make('Slug')->from('Location', 'location_name')->hideFromIndex(),
             Avatar::make('Banner Image', 'banner_image')
-                ->rules('required', 'dimensions:min_width=640,max_width=2028')
                 ->prunable()
                 ->disk('public'),
             Text::make('Leader Name', 'pastors_name')

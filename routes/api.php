@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('locations',[LocationController::class,'index']);
 Route::get('sermons', SermonController::class);
 Route::get('testimonies', [TestimonyController::class, 'index']);
+Route::get('testimonies/{testimony}', [TestimonyController::class, 'show']);
 Route::get('events/live', [EventController::class, 'live']);
 Route::get('events/up-coming', [EventController::class, 'upComing']);
 Route::get('events/passed', [EventController::class, 'passed']);

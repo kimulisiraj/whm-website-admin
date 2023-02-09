@@ -13,6 +13,7 @@ class LocationController extends Controller
     public function index(): Collection
     {
         return Location::query()
+            ->orderBy('sort', 'asc')
             ->orderBy(
                 DB::raw('case 
 	                        when pastors_level= "Moment Leaders" then 1 

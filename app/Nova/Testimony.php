@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Markdown;
+use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -46,11 +47,12 @@ class Testimony extends Resource
     {
         return [
             Avatar::make('Image', 'banner_image')
-                ->rules('required', 'image', 'dimensions:min_width:640,max_width:2048')
                 ->required()
                 ->prunable()
                 ->disk('public'),
-            Text::make('title')->rules('required', 'min:2', 'max:225')->required(),
+            Slug::make('Slug')->from('Title')->hideFromIndex(),
+
+            Text::make('Title')->rules('required', 'min:2', 'max:225')->required(),
             Markdown::make('body')->rules('required')->required(),
         ];
     }
