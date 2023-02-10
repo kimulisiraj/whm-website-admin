@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\SermonController;
 use App\Http\Controllers\Api\TestimonyController;
-use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

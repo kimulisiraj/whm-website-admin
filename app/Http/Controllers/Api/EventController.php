@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ChurchEventResource;
 use App\Models\ChurchEvent;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EventController extends Controller
 {
@@ -28,9 +29,13 @@ class EventController extends Controller
         return new ChurchEventResource($event);
     }
 
-    public function upComing()
+    public function upComing(Request $request): AnonymousResourceCollection
     {
-        $events = ChurchEvent::query()->UpComing()->latest('starts_at', 'desc')->limit(2)->get();
+        $events = ChurchEvent::query()
+            ->UpComing()
+            ->when($request->has('limit'), fn($query) => $query->limit($request->limit))
+            ->orderBy('starts_at')
+            ->get();
 
         return ChurchEventResource::collection($events);
     }
