@@ -15,7 +15,7 @@ class EventController extends Controller
     {
         $events = ChurchEvent::query()
             ->passed()
-            ->orderBy('starts_at')
+            ->orderBy('starts_at', 'desc')
             ->limit(8)
             ->get();
 
