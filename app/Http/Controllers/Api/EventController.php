@@ -11,9 +11,13 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class EventController extends Controller
 {
 
-    public function passed()
+    public function passed(): AnonymousResourceCollection
     {
-        $events = ChurchEvent::query()->passed()->latest('updated_at')->get();
+        $events = ChurchEvent::query()
+            ->passed()
+            ->orderBy('starts_at')
+            ->limit(8)
+            ->get();
 
         return ChurchEventResource::collection($events);
     }

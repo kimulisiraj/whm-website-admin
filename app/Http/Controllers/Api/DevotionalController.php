@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Devotional;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class DevotionalController extends Controller
 {
-    public function index()
+    public function index(): LengthAwarePaginator
     {
         return Devotional::query()
             ->whereNotNull('published_at')

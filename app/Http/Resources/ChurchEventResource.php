@@ -21,7 +21,8 @@ class ChurchEventResource extends JsonResource
             'description' => $this->description,
             'link'        => $this->link,
             'link_text'   => $this->link_text,
-            'happens'   => $this->happens,
+            'happens'     => $this->happens,
+            'short_date'  => $this->starts_at->format('D, d M')
         ];
     }
 }
